@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef } from "react";
-import { useFrame } from "@react-three/fiber";
+import { useFrame, useThree } from "@react-three/fiber";
 import { DoubleSide, type Group, type Mesh, type PointLight } from "three";
 import { createLabelTexture } from "./labelTexture";
 import { heroState } from "./heroState";
@@ -13,7 +13,8 @@ export function Candle() {
   const lid = useRef<Group>(null);
   const flame = useRef<Mesh>(null);
   const flameLight = useRef<PointLight>(null);
-  const label = useMemo(() => createLabelTexture(), []);
+  const gl = useThree((state) => state.gl);
+  const label = useMemo(() => createLabelTexture(gl.capabilities.getMaxAnisotropy()), [gl]);
 
   useEffect(() => () => label.dispose(), [label]);
 
@@ -64,10 +65,11 @@ export function Candle() {
         <meshPhysicalMaterial color="#f4ebd7" roughness={0.55} sheen={1} sheenColor="#fff4de" />
       </mesh>
 
-      {/* Label */}
-      <mesh position-y={-0.15}>
-        <cylinderGeometry args={[JAR_RADIUS * 0.985, JAR_RADIUS * 0.975, 1.25, 96, 1, true, -0.78, 1.56]} />
-        <meshStandardMaterial map={label} roughness={0.7} />
+      {/* Label: a sticker on the outside of the glass, so it stays crisp instead of
+          being seen through the (lower resolution) transmission pass. */}
+      <mesh position-y={-0.15} renderOrder={2}>
+        <cylinderGeometry args={[0.998, 0.981, 1.25, 128, 1, true, -0.78, 1.56]} />
+        <meshStandardMaterial map={label} roughness={0.62} polygonOffset polygonOffsetFactor={-1} />
       </mesh>
 
       {/* Wooden wick */}

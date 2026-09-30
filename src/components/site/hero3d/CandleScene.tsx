@@ -75,7 +75,7 @@ function Rig() {
 export default function CandleScene() {
   return (
     <Canvas
-      dpr={[1, 1.75]}
+      dpr={[1, 2]}
       camera={{ position: [0, 0.9, 8.5], fov: 32 }}
       gl={{ antialias: true, alpha: true }}
       shadows

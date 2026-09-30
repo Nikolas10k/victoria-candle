@@ -91,9 +91,6 @@ export function Hero() {
               candle
             </span>
           </h1>
-          <p className="mt-[9vh] max-w-[320px] text-[13px] leading-relaxed font-light text-stone md:mt-[11vh] md:text-[14px]">
-            Velas aromáticas feitas à mão — o melhor remédio para desacelerar.
-          </p>
         </div>
 
         {/* WebGL */}
