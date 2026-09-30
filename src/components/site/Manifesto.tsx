@@ -2,7 +2,7 @@ import { Reveal } from "@/components/site/Reveal";
 
 export function Manifesto() {
   return (
-    <section className="border-b border-border px-6 py-24 text-center md:py-32">
+    <section id="manifesto" className="border-b border-border px-6 py-24 text-center md:py-32">
       <Reveal className="mx-auto max-w-[880px]">
         <p className="eyebrow text-stone">Nossa essência</p>
         <p className="mt-8 font-serif text-[30px] leading-[1.2] font-light text-ink md:text-[46px]">

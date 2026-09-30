@@ -8,11 +8,15 @@ import { INSTAGRAM_HANDLE, INSTAGRAM_URL, NAV_ITEMS } from "@/lib/content";
 import { cn } from "@/lib/utils";
 
 export function Header() {
-  const [scrolled, setScrolled] = useState(false);
+  const [visible, setVisible] = useState(false);
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40);
+    // Stay out of the way over the immersive hero; slide in once it has scrolled past.
+    const onScroll = () => {
+      const hero = document.getElementById("topo");
+      setVisible(hero ? hero.getBoundingClientRect().bottom < 120 : window.scrollY > 40);
+    };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -27,22 +31,13 @@ export function Header() {
 
   return (
     <>
-      <div className="bg-forest-deep px-4 py-2.5 text-center text-[11px] tracking-[0.16em] text-ivory/90 uppercase">
-        Velas artesanais feitas à mão · Encomendas pelo Instagram{" "}
-        <a href={INSTAGRAM_URL} target="_blank" rel="noreferrer" className="underline underline-offset-4">
-          {INSTAGRAM_HANDLE}
-        </a>
-      </div>
-
       <header
         className={cn(
-          "sticky top-0 z-40 border-b transition-[background-color,border-color,box-shadow] duration-500",
-          scrolled
-            ? "border-border bg-ivory/95 shadow-[0_1px_24px_rgba(29,26,23,0.06)] backdrop-blur-md"
-            : "border-transparent bg-ivory",
+          "fixed inset-x-0 top-0 z-40 border-b border-border bg-ivory/95 shadow-[0_1px_24px_rgba(29,26,23,0.06)] backdrop-blur-md transition-transform duration-500 ease-[cubic-bezier(0.2,0.7,0.2,1)]",
+          visible ? "translate-y-0" : "-translate-y-full",
         )}
       >
-        <div className="mx-auto grid h-[72px] max-w-[1440px] grid-cols-[1fr_auto_1fr] items-center px-4 md:h-[88px] md:px-10">
+        <div className="mx-auto grid h-[72px] max-w-[1440px] grid-cols-[1fr_auto_1fr] items-center px-4 md:h-[76px] md:px-10">
           <div className="flex items-center gap-5">
             <button
               type="button"
@@ -87,8 +82,7 @@ export function Header() {
         <nav
           aria-label="Principal"
           className={cn(
-            "hidden justify-center gap-10 overflow-hidden transition-[max-height,opacity,padding] duration-500 md:flex",
-            scrolled ? "max-h-0 pb-0 opacity-0" : "max-h-12 pb-5 opacity-100",
+            "hidden justify-center gap-10 pb-4 md:flex",
           )}
         >
           {NAV_ITEMS.map((item) => (

@@ -10,6 +10,7 @@
   --font-sans: var(--font-jost), ui-sans-serif, system-ui, sans-serif;
   --font-serif: var(--font-cormorant), ui-serif, Georgia, serif;
   --font-heading: var(--font-serif);
+  --font-script: var(--font-mrs), cursive;
   --color-ivory: var(--ivory);
   --color-sand: var(--sand);
   --color-ink: var(--ink);
@@ -189,4 +190,20 @@
 
 html {
   scroll-behavior: smooth;
+}
+
+.hero-script {
+  clip-path: inset(-20% 100% -20% 0);
+  animation: script-draw 1.8s cubic-bezier(0.6, 0, 0.2, 1) 1.2s forwards;
+}
+@keyframes script-draw {
+  to {
+    clip-path: inset(-20% -10% -20% 0);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-script {
+    animation: none;
+    clip-path: none;
+  }
 }
