@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "skills": {
+    "rea-changelog-update": {
+      "source": "morluto/rea",
+      "sourceType": "github",
+      "skillPath": ".agents/skills/rea-changelog-update/SKILL.md",
+      "computedHash": "1f5388dc00bc6b06d039ca8f842bde2594bb6112a77cb1a96c8dbc31fb488983"
+    },
+    "rea-tool-design": {
+      "source": "morluto/rea",
+      "sourceType": "github",
+      "skillPath": ".agents/skills/rea-tool-design/SKILL.md",
+      "computedHash": "b1dd54035bbd31a55196dba0ce78a55c9a548e7ac395ad3771f9fe8784a6fc6a"
+    },
+    "reverse-engineer-anything": {
+      "source": "morluto/rea",
+      "sourceType": "github",
+      "skillPath": ".agents/skills/reverse-engineer-anything/SKILL.md",
+      "computedHash": "9912bd32fbcabe7f7ef4de630e4f5ab2a851957c4ee4e34dbbe1314b55fbe693"
+    }
+  }
+}
